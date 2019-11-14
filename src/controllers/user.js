@@ -1,4 +1,4 @@
-import { User } from '../models'
+import { User, FamilyMember } from '../models'
 import { createToken, redisClient, getLoginfromHeader } from '../config'
 import { AppError } from '../utils'
 import { httpStatus } from '../constants'
@@ -8,7 +8,10 @@ export const UserController = {
     const { name, email, mobile, password } = req.body
     const newUser = new User({ name, email, mobile })
     newUser.password = newUser.generateHash(password)
-    await newUser.save()
+    const saved = await newUser.save()
+    if (saved._id) {
+      await FamilyMember.create({ user: saved._id, name, relations: [], maritalStatus: 'Unmarried', gender: 'Male' })
+    }
     return res.json({ message: 'User successfully created' })
   },
   getUserData: async (req, res) => {

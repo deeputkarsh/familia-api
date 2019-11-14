@@ -1,10 +1,12 @@
 import UserRouter from './user'
+import FamilyRouter from './family_member'
 import VersionHealthRouter from './version_health'
 import { httpStatus } from '../constants'
 import { AppError } from '../utils'
 
 const RouteData = [
   { path: '/user', router: UserRouter },
+  { path: '/family-member', router: FamilyRouter },
   { path: '/api', router: VersionHealthRouter }
 ]
 
