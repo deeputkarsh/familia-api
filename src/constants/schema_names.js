@@ -1,3 +1,4 @@
 export const SCHEMA_NAMES = {
-  USER: 'User'
+  USER: 'user',
+  FAMILY_MEMBER: 'family_member'
 }
