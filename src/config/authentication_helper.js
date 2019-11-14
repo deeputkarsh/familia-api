@@ -13,6 +13,6 @@ export const isJWTRevoked = async (req, payload, done) => {
 
 export const getLoginfromHeader = ({ authorization = '' }) => {
   const authData = authorization.replace('Basic ', '')
-  const [mobile, password] = Buffer.from(authData, 'base64').toString().split(':')
-  return { mobile, password }
+  const [userId, password] = Buffer.from(authData, 'base64').toString().split(':')
+  return { userId, password }
 }

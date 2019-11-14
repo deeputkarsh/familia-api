@@ -16,8 +16,8 @@ export const UserController = {
     return res.json({ user })
   },
   login: async (req, res) => {
-    const { mobile, password } = getLoginfromHeader(req.headers)
-    const user = await User.findOne({ mobile })
+    const { userId, password } = getLoginfromHeader(req.headers)
+    const user = await User.findOne({ $or: [{ mobile: userId }, { email: userId }] })
     if (!user) {
       throw new AppError("User doesn't exist", httpStatus.UNAUTHORIZED)
     } else if (!user.validPassword(password)) {

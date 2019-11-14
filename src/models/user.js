@@ -1,9 +1,13 @@
 import mongoose, { Schema } from 'mongoose'
-import bcrypt from 'bcrypt-nodejs'
+import bcrypt from 'bcrypt'
 import { SCHEMA_NAMES } from '../constants'
 
 const schemaDef = new Schema({
-  email: String,
+  email: {
+    type: String,
+    unique: true,
+    required: true
+  },
   password: {
     type: String,
     required: true
@@ -14,7 +18,7 @@ const schemaDef = new Schema({
     max: 100
   },
   mobile: {
-    type: Number,
+    type: String,
     unique: true
   }
 })
